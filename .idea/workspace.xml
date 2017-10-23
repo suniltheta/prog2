@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="537d39fa-c30d-4bbc-a768-053405561caf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rasterize.js" afterPath="$PROJECT_DIR$/rasterize.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -31,10 +29,11 @@
       <file leaf-file-name="rasterize.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rasterize.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="229" column="118" lean-forward="false" selection-start-line="229" selection-start-column="118" selection-end-line="229" selection-end-column="118" />
+            <state relative-caret-position="187">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="n#Vector#0" expanded="false" />
                 <element signature="n#!!block;n#getJSONFile#0" expanded="false" />
                 <element signature="n#!!block;n#setupWebGL#0" expanded="false" />
               </folding>
@@ -42,11 +41,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ellipsoids.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ellipsoids.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="triangles.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/triangles.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="78" lean-forward="false" selection-start-line="2" selection-start-column="70" selection-end-line="2" selection-end-column="78" />
+            <state relative-caret-position="204">
+              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -58,11 +67,22 @@
     <findStrings>
       <find>shaderProgram</find>
       <find>vertexPosition</find>
-      <find>vertexPositionAttrib</find>
       <find>obj</find>
       <find>vertexBuffer</find>
       <find>ambientColorUniform</find>
       <find>diffuseBuffer</find>
+      <find>vtxToAdd</find>
+      <find>coordArray</find>
+      <find>normalBuffer</find>
+      <find>vertexPositionAttrib</find>
+      <find>aNormalPosition</find>
+      <find>normalPositionAttrib</find>
+      <find>vertexNormalAttribute</find>
+      <find>enableVertexAttribArray</find>
+      <find>inputTriangles</find>
+      <find>indexOffset</find>
+      <find>vtxBufferSize</find>
+      <find>triBufferSize</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -88,7 +108,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -154,15 +174,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508725208780</updated>
-      <workItem from="1508725215280" duration="4839000" />
+      <workItem from="1508725215280" duration="7597000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4839000" />
+    <option name="totallyTimeSpent" value="7597000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17935579" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -204,18 +224,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/triangles.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="78" lean-forward="false" selection-start-line="2" selection-start-column="70" selection-end-line="2" selection-end-column="78" />
+        <state relative-caret-position="204">
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ellipsoids.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rasterize.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="229" column="118" lean-forward="false" selection-start-line="229" selection-start-column="118" selection-end-line="229" selection-end-column="118" />
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="n#Vector#0" expanded="false" />
             <element signature="n#!!block;n#getJSONFile#0" expanded="false" />
             <element signature="n#!!block;n#setupWebGL#0" expanded="false" />
           </folding>
