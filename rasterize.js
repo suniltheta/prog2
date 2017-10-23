@@ -29,7 +29,7 @@ var nMatrixUniform;
 var pointLightingDiffuseColorUniform;
 
 var pointLightingLocationUniform;
-
+var pointEyeLocationUniform;
 
 var mvMatrix = mat4.create();
 var mvMatrixStack = [];
@@ -241,6 +241,7 @@ function setupShaders() {
         uniform vec3 uPointLightingSpecularColor;
         
         uniform vec3 uPointLightingLocation;
+        uniform vec3 uPointEyeLocation;
 
         void main(void) {
             
@@ -253,12 +254,13 @@ function setupShaders() {
     
                 float specularLightWeighting = 0.0;
                 if (true) { //uShowSpecularHighlights
-                    vec3 eyeDirection = normalize(-vPosition.xyz);
-                    vec3 reflectionDirection = reflect(-lightDirection, normal);
-    
-                    specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
+                    vec3 eyeDirection = normalize(uPointEyeLocation - vPosition.xyz);
+                    // vec3 reflectionDirection = reflect(-lightDirection, normal);
+                    // specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
+                    vec3 h_direction = normalize(lightDirection + eyeDirection);
+                    specularLightWeighting = pow(max(dot(normal, h_direction), 0.0), uMaterialShininess);
                 }
-    
+                // color = ka*La + kd*Ld(N*L) + ks*Ls(N*H)^n
                 float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
                 lightWeighting = uAmbientColor
                     + uPointLightingSpecularColor * specularLightWeighting
@@ -269,11 +271,6 @@ function setupShaders() {
             fragmentColor = vec4(1.0, 1.0, 1.0, 1.0);
             
             gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
-            ////////////////////
-            // vec4 fragmentColor;
-            // vec3 lightWeighting = uPointLightingDiffuseColor;
-            // fragmentColor = vec4(1.0, 1.0, 1.0, 1.0);
-            // gl_FragColor = vec4(fragmentColor.rgb * uPointLightingDiffuseColor, fragmentColor.a);
         }
     `;
     
@@ -289,9 +286,9 @@ function setupShaders() {
         varying vec4 vPosition;
         
         void main(void) {
-            vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
-            gl_Position = uPMatrix * vPosition;
-            vTransformedNormal = uNMatrix * aVertexNormal;
+            vPosition =  vec4(aVertexPosition, 1.0);
+            gl_Position = uPMatrix * uMVMatrix * vPosition;
+            vTransformedNormal = aVertexNormal;
         }
     `;
     
@@ -334,6 +331,7 @@ function setupShaders() {
                 nMatrixUniform = gl.getUniformLocation(shaderProgram, "uNMatrix");
 
                 pointLightingLocationUniform = gl.getUniformLocation(shaderProgram, "uPointLightingLocation");
+                pointEyeLocationUniform = gl.getUniformLocation(shaderProgram, "uPointEyeLocation");
 
                 ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
                 pointLightingDiffuseColorUniform = gl.getUniformLocation(shaderProgram, "uPointLightingDiffuseColor");
@@ -518,7 +516,8 @@ function loadTriangles() {
 function renderTriangles() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // clear frame/depth buffers
 
-    gl.uniform3f(pointLightingLocationUniform, -1, 3, -3);
+    gl.uniform3f(pointLightingLocationUniform, -1, 3, -0.5);
+    gl.uniform3f(pointEyeLocationUniform, 0.5,0.5,-0.5);
 
     for(i =0; i<vertexBuffer.length; i++){
 
