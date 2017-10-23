@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="537d39fa-c30d-4bbc-a768-053405561caf" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rasterize.js" afterPath="$PROJECT_DIR$/rasterize.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -29,16 +30,29 @@
       <file leaf-file-name="rasterize.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rasterize.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="444" column="35" lean-forward="true" selection-start-line="444" selection-start-column="35" selection-end-line="444" selection-end-column="35" />
+            <state relative-caret-position="389">
+              <caret line="574" column="29" lean-forward="true" selection-start-line="574" selection-start-column="29" selection-end-line="574" selection-end-column="29" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="n#Vector#0" expanded="false" />
                 <element signature="n#!!block;n#getJSONFile#0" expanded="false" />
                 <element signature="n#!!block;n#setupWebGL#0" expanded="false" />
-                <element signature="e#13771#17100#0" expanded="false" />
-                <element signature="e#15055#15376#0" expanded="false" />
-                <element signature="e#15585#15766#0" expanded="false" />
+                <element signature="n#!!block;n#setupShaders#0" expanded="false" />
+                <element signature="n#!!block;n#setMatrixUniforms#0" expanded="false" />
+                <element signature="n#!!block;n#loadTriangles#0" expanded="false" />
+                <element signature="e#13986#17315#0" expanded="false" />
+                <element signature="e#15270#15591#0" expanded="false" />
+                <element signature="e#15800#15981#0" expanded="false" />
+                <element signature="n#!!block;n#renderTriangles#0" expanded="false" />
+                <element signature="n#!!block;n#initializeControls#0" expanded="false" />
+                <element signature="e#24599#24939#0" expanded="false" />
+                <element signature="e#24647#24755#0" expanded="false" />
+                <element signature="e#24776#24916#0" expanded="false" />
+                <element signature="e#24952#25292#0" expanded="false" />
+                <element signature="e#25305#25645#0" expanded="false" />
+                <element signature="e#25658#25998#0" expanded="false" />
+                <element signature="e#26011#26146#0" expanded="false" />
+                <element signature="e#26159#26294#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -57,8 +71,8 @@
       <file leaf-file-name="triangles.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/triangles.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+            <state relative-caret-position="51">
+              <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -75,19 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>obj</find>
-      <find>vertexBuffer</find>
-      <find>vtxToAdd</find>
-      <find>coordArray</find>
-      <find>normalBuffer</find>
-      <find>vertexPositionAttrib</find>
-      <find>aNormalPosition</find>
-      <find>normalPositionAttrib</find>
-      <find>vertexNormalAttribute</find>
-      <find>enableVertexAttribArray</find>
-      <find>inputTriangles</find>
-      <find>indexOffset</find>
-      <find>vtxBufferSize</find>
       <find>diffuseBuffer</find>
       <find>aVertexPosition</find>
       <find>triBufferSize</find>
@@ -96,7 +97,6 @@
       <find>vTransformedNormal</find>
       <find>normalMatrix = mat3.</find>
       <find>uNMatrix</find>
-      <find>pMatrix</find>
       <find>uAmbientColor</find>
       <find>lightWeighting</find>
       <find>pointLightingSpecularColorUniform</find>
@@ -105,6 +105,20 @@
       <find>eye</find>
       <find>light</find>
       <find>lightDirection</find>
+      <find>uMaterialShininess</find>
+      <find>document</find>
+      <find>LookAt</find>
+      <find>setMatrixUniforms</find>
+      <find>pMatrix</find>
+      <find>gl_Position</find>
+      <find>setEli</find>
+      <find>inputEllipsoids</find>
+      <find>inputTriangles</find>
+      <find>vec3</find>
+      <find>center</find>
+      <find>tri[setTri].vertices</find>
+      <find>console.log</find>
+      <find>updateAndLoadTriangles</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -198,12 +212,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508725208780</updated>
-      <workItem from="1508725215280" duration="16132000" />
+      <workItem from="1508725215280" duration="32170000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16132000" />
+    <option name="totallyTimeSpent" value="32170000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -238,14 +252,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/triangles.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/glMatrix-0.9.5.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -270,18 +276,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/triangles.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rasterize.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="444" column="35" lean-forward="true" selection-start-line="444" selection-start-column="35" selection-end-line="444" selection-end-column="35" />
+        <state relative-caret-position="389">
+          <caret line="574" column="29" lean-forward="true" selection-start-line="574" selection-start-column="29" selection-end-line="574" selection-end-column="29" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="n#Vector#0" expanded="false" />
             <element signature="n#!!block;n#getJSONFile#0" expanded="false" />
             <element signature="n#!!block;n#setupWebGL#0" expanded="false" />
-            <element signature="e#13771#17100#0" expanded="false" />
-            <element signature="e#15055#15376#0" expanded="false" />
-            <element signature="e#15585#15766#0" expanded="false" />
+            <element signature="n#!!block;n#setupShaders#0" expanded="false" />
+            <element signature="n#!!block;n#setMatrixUniforms#0" expanded="false" />
+            <element signature="n#!!block;n#loadTriangles#0" expanded="false" />
+            <element signature="e#13986#17315#0" expanded="false" />
+            <element signature="e#15270#15591#0" expanded="false" />
+            <element signature="e#15800#15981#0" expanded="false" />
+            <element signature="n#!!block;n#renderTriangles#0" expanded="false" />
+            <element signature="n#!!block;n#initializeControls#0" expanded="false" />
+            <element signature="e#24599#24939#0" expanded="false" />
+            <element signature="e#24647#24755#0" expanded="false" />
+            <element signature="e#24776#24916#0" expanded="false" />
+            <element signature="e#24952#25292#0" expanded="false" />
+            <element signature="e#25305#25645#0" expanded="false" />
+            <element signature="e#25658#25998#0" expanded="false" />
+            <element signature="e#26011#26146#0" expanded="false" />
+            <element signature="e#26159#26294#0" expanded="false" />
           </folding>
         </state>
       </provider>

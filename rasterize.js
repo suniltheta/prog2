@@ -35,6 +35,9 @@ var mvMatrix = mat4.create();
 var mvMatrixStack = [];
 var pMatrix = mat4.create();
 
+var setTri = -1;
+var setEli = -1;
+
 // Vector class
 class Vector {
     constructor(x,y,z) {
@@ -360,9 +363,14 @@ function setMatrixUniforms(){
 }
 
 // read triangles in, load them into webgl buffers
-function loadTriangles() {
-    var inputTriangles = getJSONFile(INPUT_TRIANGLES_URL,"triangles");
-    var inputEllipsoids = getJSONFile(INPUT_SPHERES_URL,"ellipsoids");
+function loadTriangles(inputTriangles, inputEllipsoids) {
+    // var inputTriangles = getJSONFile(INPUT_TRIANGLES_URL,"triangles");
+    // var inputEllipsoids = getJSONFile(INPUT_SPHERES_URL,"ellipsoids");
+    vertexBuffer = []; // this contains vertex coordinates in triples
+    normalBuffer = [];
+    triangleBuffer = [];
+    triBufferSize = [];
+
     var obj = -1;
 
     if (inputTriangles != String.null) {
@@ -510,14 +518,17 @@ function loadTriangles() {
         } // end for each ellipsoid set
 
     } // end if triangles found
+
+    renderTriangles();
 } // end load triangles
 
 // render the loaded model
 function renderTriangles() {
+    setMatrixUniforms();
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // clear frame/depth buffers
 
     gl.uniform3f(pointLightingLocationUniform, -1, 3, -0.5);
-    gl.uniform3f(pointEyeLocationUniform, 0.5,0.5,-0.5);
+    gl.uniform3f(pointEyeLocationUniform, Eye[0],Eye[1],Eye[2]);
 
     for(i =0; i<vertexBuffer.length; i++){
 
@@ -541,15 +552,144 @@ function renderTriangles() {
 
 } // end render triangles
 
+function updateAndLoadTriangles(inputTriangles, inputEllipsoids){
+    var tri = JSON.parse(JSON.stringify(inputTriangles));
+    var eli = JSON.parse(JSON.stringify(inputEllipsoids));
+    if(setTri >= 0){
+        var center = new vec3.fromValues(0,0,0);
+        for(var i = 0; i< tri[setTri].vertices.length; i++){
+            var temp = tri[setTri].vertices[i];
+            vec3.add(center, center, new vec3.fromValues(temp[0],temp[1],temp[2]))
+        }
+        vec3.scale(center, center, 1/tri[setTri].vertices.length);
+        var center_ = new vec3.fromValues(0,0,0);
+        vec3.scale(center_, center, -0.2);
+        for(var i = 0; i< tri[setTri].vertices.length; i++){
+            var temp = new vec3.fromValues(tri[setTri].vertices[i][0],tri[setTri].vertices[i][1],tri[setTri].vertices[i][2]);
+            vec3.scale(temp, temp, 1.2);
+            vec3.add(temp, temp, center_);
+            tri[setTri].vertices[i] = temp;
+        }
+    }
+    if(setEli >= 0){
+        eli[setEli].a *= 1.2;
+        eli[setEli].b *= 1.2;
+        eli[setEli].c *= 1.2;
+    }
+    loadTriangles(tri, eli);
+}
+
+function initializeControls(inputTriangles, inputEllipsoids){
+    document.addEventListener('keydown', function(event) {
+        console.log(event.code);
+        switch(event.code)
+        {
+            case 'KeyA':
+                if (event.shiftKey){ //Capital A
+                    lookAt[0] -= 0.1;
+                    renderTriangles();
+                }
+                else{//Small a
+                    Eye[0] -= 0.1;
+                    lookAt[0] -= 0.1;
+                    renderTriangles();
+                }
+                break;
+            case 'KeyD':
+                if (event.shiftKey){ //Capital D
+                    lookAt[0] += 0.1;
+                    renderTriangles();
+                }
+                else{//Small d
+                    Eye[0] += 0.1;
+                    lookAt[0] += 0.1;
+                    renderTriangles();
+                }
+                break;
+            case 'KeyW':
+                if (event.shiftKey){ //Capital W
+                    lookAt[1] += 0.1;
+                    renderTriangles();
+                }
+                else{//Small w
+                    Eye[2] -= 0.1;
+                    lookAt[2] -= 0.1;
+                    renderTriangles();
+                }
+                break;
+            case 'KeyS':
+                if (event.shiftKey){ //Capital S
+                    lookAt[1] -= 0.1;
+                    renderTriangles();
+                }
+                else{//Small s
+                    Eye[2] += 0.1;
+                    lookAt[2] += 0.1;
+                    renderTriangles();
+                }
+                break;
+            case 'KeyQ':
+                Eye[1] -= 0.1;
+                lookAt[1] -= 0.1;
+                renderTriangles();
+                break;
+            case 'KeyE':
+                Eye[1] += 0.1;
+                lookAt[1] += 0.1;
+                renderTriangles();
+                break;
+            case 'ArrowUp':
+                setEli += 1;
+                setEli = setEli % inputEllipsoids.length;
+                setTri = -1;
+                updateAndLoadTriangles(inputTriangles, inputEllipsoids);
+                break;
+            case 'ArrowDown':
+                setEli -= 1;
+                if(setEli < 0){
+                    setEli = inputEllipsoids.length - 1;
+                }
+                setTri = -1;
+                updateAndLoadTriangles(inputTriangles, inputEllipsoids);
+                break;
+            case 'ArrowLeft':
+                setEli = -1;
+                setTri += 1;
+                setTri = setTri % inputTriangles.length;
+                updateAndLoadTriangles(inputTriangles, inputEllipsoids);
+                break;
+            case 'ArrowRight':
+                setEli = -1;
+                setTri -= 1;
+                if(setTri < 0){
+                    setTri = inputTriangles.length - 1;
+                }
+                updateAndLoadTriangles(inputTriangles, inputEllipsoids);
+                break;
+            case 'Space':
+                setEli = -1;
+                setTri = -1;
+                loadTriangles(inputTriangles, inputEllipsoids);
+                break;
+            default:
+                break;
+        }
+        //alert('Undo!')
+    });
+}
 
 /* MAIN -- HERE is where execution begins after window load */
 
 function main() {
   
     setupWebGL(); // set up the webGL environment
-    loadTriangles(); // load in the triangles from tri file
-    setupShaders(); // setup the webGL shaders
-    setMatrixUniforms();
-    renderTriangles(); // draw the triangles using webGL
+    setupShaders();
+    var inputTriangles = getJSONFile(INPUT_TRIANGLES_URL,"triangles");
+    var inputEllipsoids = getJSONFile(INPUT_SPHERES_URL,"ellipsoids");
+    loadTriangles(inputTriangles, inputEllipsoids); // load in the triangles from tri file
+    // setupShaders(); // setup the webGL shaders
+    //setMatrixUniforms();
+    //renderTriangles(); // draw the triangles using webGL
+    initializeControls(inputTriangles, inputEllipsoids);
   
 } // end main
