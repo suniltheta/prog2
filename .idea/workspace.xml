@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="537d39fa-c30d-4bbc-a768-053405561caf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rasterize.js" afterPath="$PROJECT_DIR$/rasterize.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -30,29 +29,33 @@
       <file leaf-file-name="rasterize.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rasterize.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="585" column="0" lean-forward="true" selection-start-line="585" selection-start-column="0" selection-end-line="585" selection-end-column="0" />
+            <state relative-caret-position="475">
+              <caret line="287" column="4" lean-forward="true" selection-start-line="287" selection-start-column="4" selection-end-line="287" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="n#Vector#0" expanded="false" />
                 <element signature="n#!!block;n#getJSONFile#0" expanded="false" />
                 <element signature="n#!!block;n#setupWebGL#0" expanded="false" />
-                <element signature="n#!!block;n#setupShaders#0" expanded="false" />
                 <element signature="n#!!block;n#setMatrixUniforms#0" expanded="false" />
-                <element signature="e#15346#15667#0" expanded="false" />
-                <element signature="e#15876#16057#0" expanded="false" />
-                <element signature="n#!!block;n#renderTriangles#0" expanded="false" />
+                <element signature="n#!!block;n#loadTriangles#0" expanded="false" />
+                <element signature="e#15665#15986#0" expanded="false" />
+                <element signature="e#16195#16376#0" expanded="false" />
                 <element signature="n#!!block;n#updateAndLoadTriangles#0" expanded="false" />
                 <element signature="n#!!block;n#updateColorAndLoadTriangles#0" expanded="false" />
-                <element signature="n#!!block;n#initializeControls#0" expanded="false" />
-                <element signature="e#26320#26660#0" expanded="false" />
-                <element signature="e#26368#26476#0" expanded="false" />
-                <element signature="e#26497#26637#0" expanded="false" />
-                <element signature="e#26673#27013#0" expanded="false" />
-                <element signature="e#27026#27366#0" expanded="false" />
-                <element signature="e#27379#27719#0" expanded="false" />
-                <element signature="e#27732#27867#0" expanded="false" />
-                <element signature="e#27880#28015#0" expanded="false" />
+                <element signature="e#26706#27046#0" expanded="false" />
+                <element signature="e#27059#27399#0" expanded="false" />
+                <element signature="e#27412#27752#0" expanded="false" />
+                <element signature="e#27765#28105#0" expanded="false" />
+                <element signature="e#28118#28253#0" expanded="false" />
+                <element signature="e#28266#28401#0" expanded="false" />
+                <element signature="e#28414#28641#0" expanded="false" />
+                <element signature="e#28654#28932#0" expanded="false" />
+                <element signature="e#28945#29173#0" expanded="false" />
+                <element signature="e#29477#29635#0" expanded="false" />
+                <element signature="e#29648#29772#0" expanded="false" />
+                <element signature="e#29785#29915#0" expanded="false" />
+                <element signature="e#29928#30058#0" expanded="false" />
+                <element signature="e#30071#30201#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -89,7 +92,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ambientColorUniform</find>
       <find>vTransformedNormal</find>
       <find>normalMatrix = mat3.</find>
       <find>uNMatrix</find>
@@ -97,7 +99,6 @@
       <find>lightWeighting</find>
       <find>pointLightingSpecularColorUniform</find>
       <find>uPointLightingSpecularColor</find>
-      <find>eyeDirection</find>
       <find>eye</find>
       <find>light</find>
       <find>lightDirection</find>
@@ -119,6 +120,8 @@
       <find>setTri</find>
       <find>isColorSet</find>
       <find>console.log</find>
+      <find>pointLightingDiffuseColorUniform</find>
+      <find>eyeDirection</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,7 +149,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -212,15 +215,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1508725208780</updated>
-      <workItem from="1508725215280" duration="38026000" />
+      <workItem from="1508725215280" duration="39092000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38026000" />
+    <option name="totallyTimeSpent" value="39092000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17935579" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -249,7 +252,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -288,29 +291,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rasterize.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="585" column="0" lean-forward="true" selection-start-line="585" selection-start-column="0" selection-end-line="585" selection-end-column="0" />
+        <state relative-caret-position="475">
+          <caret line="287" column="4" lean-forward="true" selection-start-line="287" selection-start-column="4" selection-end-line="287" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="n#Vector#0" expanded="false" />
             <element signature="n#!!block;n#getJSONFile#0" expanded="false" />
             <element signature="n#!!block;n#setupWebGL#0" expanded="false" />
-            <element signature="n#!!block;n#setupShaders#0" expanded="false" />
             <element signature="n#!!block;n#setMatrixUniforms#0" expanded="false" />
-            <element signature="e#15346#15667#0" expanded="false" />
-            <element signature="e#15876#16057#0" expanded="false" />
-            <element signature="n#!!block;n#renderTriangles#0" expanded="false" />
+            <element signature="n#!!block;n#loadTriangles#0" expanded="false" />
+            <element signature="e#15665#15986#0" expanded="false" />
+            <element signature="e#16195#16376#0" expanded="false" />
             <element signature="n#!!block;n#updateAndLoadTriangles#0" expanded="false" />
             <element signature="n#!!block;n#updateColorAndLoadTriangles#0" expanded="false" />
-            <element signature="n#!!block;n#initializeControls#0" expanded="false" />
-            <element signature="e#26320#26660#0" expanded="false" />
-            <element signature="e#26368#26476#0" expanded="false" />
-            <element signature="e#26497#26637#0" expanded="false" />
-            <element signature="e#26673#27013#0" expanded="false" />
-            <element signature="e#27026#27366#0" expanded="false" />
-            <element signature="e#27379#27719#0" expanded="false" />
-            <element signature="e#27732#27867#0" expanded="false" />
-            <element signature="e#27880#28015#0" expanded="false" />
+            <element signature="e#26706#27046#0" expanded="false" />
+            <element signature="e#27059#27399#0" expanded="false" />
+            <element signature="e#27412#27752#0" expanded="false" />
+            <element signature="e#27765#28105#0" expanded="false" />
+            <element signature="e#28118#28253#0" expanded="false" />
+            <element signature="e#28266#28401#0" expanded="false" />
+            <element signature="e#28414#28641#0" expanded="false" />
+            <element signature="e#28654#28932#0" expanded="false" />
+            <element signature="e#28945#29173#0" expanded="false" />
+            <element signature="e#29477#29635#0" expanded="false" />
+            <element signature="e#29648#29772#0" expanded="false" />
+            <element signature="e#29785#29915#0" expanded="false" />
+            <element signature="e#29928#30058#0" expanded="false" />
+            <element signature="e#30071#30201#0" expanded="false" />
           </folding>
         </state>
       </provider>

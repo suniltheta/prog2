@@ -22,12 +22,14 @@ var specularBuffer = [];
 var isColorSet;
 var nBuffer = [];
 var vertexPositionAttrib; // where to put position for vertex shader
-var vertexNormalAttribute ;
+var vertexNormalAttribute;
+var togglePhongShade = true;
 
 var pMatrixUniform;
 var mvMatrixUniform;
 var nMatrixUniform;
 var pointLightingDiffuseColorUniform;
+var togglePhongShadeUniform;
 
 var pointLightingLocationUniform;
 var pointEyeLocationUniform;
@@ -240,6 +242,7 @@ function setupShaders() {
         varying vec4 vPosition;
         
         uniform float uMaterialShininess;
+        uniform bool  uToggleShininess;
         uniform vec3 uAmbientColor;
         uniform vec3 uPointLightingDiffuseColor;
         uniform vec3 uPointLightingSpecularColor;
@@ -257,13 +260,18 @@ function setupShaders() {
                 vec3 normal = normalize(vTransformedNormal);
     
                 float specularLightWeighting = 0.0;
-                if (true) { //uShowSpecularHighlights
+
+                if(uToggleShininess){
                     vec3 eyeDirection = normalize(uPointEyeLocation - vPosition.xyz);
-                    // vec3 reflectionDirection = reflect(-lightDirection, normal);
-                    // specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
                     vec3 h_direction = normalize(lightDirection + eyeDirection);
                     specularLightWeighting = pow(max(dot(normal, h_direction), 0.0), uMaterialShininess);
                 }
+                else{
+                    vec3 eyeDirection = normalize(uPointEyeLocation - vPosition.xyz);
+                    vec3 reflectionDirection = reflect(-lightDirection, normal);
+                    specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
+                }
+                
                 // color = ka*La + kd*Ld(N*L) + ks*Ls(N*H)^n
                 float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
                 lightWeighting = uAmbientColor
@@ -341,6 +349,7 @@ function setupShaders() {
                 pointLightingDiffuseColorUniform = gl.getUniformLocation(shaderProgram, "uPointLightingDiffuseColor");
                 pointLightingSpecularColorUniform = gl.getUniformLocation(shaderProgram, "uPointLightingSpecularColor");
                 materialShininessUniform = gl.getUniformLocation(shaderProgram, "uMaterialShininess");
+                togglePhongShadeUniform = gl.getUniformLocation(shaderProgram, "uToggleShininess");
 
             } // end if no shader program link errors
         } // end if no compile errors
@@ -536,6 +545,9 @@ function renderTriangles() {
     gl.uniform3f(pointEyeLocationUniform, Eye[0],Eye[1],Eye[2]);
 
     for(i =0; i<vertexBuffer.length; i++){
+
+
+        gl.uniform1f(togglePhongShadeUniform, togglePhongShade);
 
         gl.uniform3f(ambientColorUniform, ambientBuffer[i][0], ambientBuffer[i][1], ambientBuffer[i][2]);
         gl.uniform3f(pointLightingDiffuseColorUniform, diffuseBuffer[i][0], diffuseBuffer[i][1], diffuseBuffer[i][2]);
@@ -737,6 +749,11 @@ function initializeControls(inputTriangles, inputEllipsoids){
                 break;
             case 'Digit3':
                 updateColorAndLoadTriangles(inputTriangles, inputEllipsoids, p0, p0, p1, 0);
+                break;
+            case 'KeyB':
+                togglePhongShade = !togglePhongShade;
+                setupShaders();
+                updateAndLoadTriangles(inputTriangles, inputEllipsoids);
                 break;
             default:
                 break;
