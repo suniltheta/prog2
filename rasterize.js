@@ -19,6 +19,7 @@ var triBufferSize = []; // the number of indices in the triangle buffer
 var ambientBuffer = [];
 var diffuseBuffer = [];
 var specularBuffer = [];
+var isColorSet;
 var nBuffer = [];
 var vertexPositionAttrib; // where to put position for vertex shader
 var vertexNormalAttribute ;
@@ -391,10 +392,12 @@ function loadTriangles(inputTriangles, inputEllipsoids) {
 
             vec3.set(indexOffset,vtxBufferSize,vtxBufferSize,vtxBufferSize); // update vertex offset
 
-            ambientBuffer[obj] = inputTriangles[whichSet].material.ambient;
-            diffuseBuffer[obj] = inputTriangles[whichSet].material.diffuse;
-            specularBuffer[obj] = inputTriangles[whichSet].material.specular;
-            nBuffer[obj] = inputTriangles[whichSet].material.n;
+            if(!isColorSet) {
+                ambientBuffer[obj] = inputTriangles[whichSet].material.ambient;
+                diffuseBuffer[obj] = inputTriangles[whichSet].material.diffuse;
+                specularBuffer[obj] = inputTriangles[whichSet].material.specular;
+                nBuffer[obj] = inputTriangles[whichSet].material.n;
+            }
 
             // set up the vertex coord array
             for (whichSetVert=0; whichSetVert<inputTriangles[whichSet].vertices.length; whichSetVert++) {
@@ -459,10 +462,12 @@ function loadTriangles(inputTriangles, inputEllipsoids) {
             var a = inputEllipsoids[whichSet].a;
             var b = inputEllipsoids[whichSet].b;
             var c = inputEllipsoids[whichSet].c;
-            ambientBuffer[obj] = inputEllipsoids[whichSet].ambient;
-            diffuseBuffer[obj] = inputEllipsoids[whichSet].diffuse;
-            specularBuffer[obj] = inputEllipsoids[whichSet].specular;
-            nBuffer[obj] = inputEllipsoids[whichSet].n;
+            if(!isColorSet) {
+                ambientBuffer[obj] = inputEllipsoids[whichSet].ambient;
+                diffuseBuffer[obj] = inputEllipsoids[whichSet].diffuse;
+                specularBuffer[obj] = inputEllipsoids[whichSet].specular;
+                nBuffer[obj] = inputEllipsoids[whichSet].n;
+            }
 
             for (var latNumber=0; latNumber <= latitudeBands; latNumber++) {
                 var theta = latNumber * Math.PI / latitudeBands;
@@ -579,9 +584,59 @@ function updateAndLoadTriangles(inputTriangles, inputEllipsoids){
     loadTriangles(tri, eli);
 }
 
+function updateColorAndLoadTriangles(inputTriangles, inputEllipsoids, a, d, s, n) {
+    var offset = -1;
+    isColorSet = true;
+    if(setTri >= 0){
+        offset = setTri;
+        nBuffer[offset] -= n;
+        if(nBuffer[offset] < 2){
+            nBuffer[offset] = inputTriangles[setTri].material.n;
+        }
+    }
+    else if(setEli >= 0){
+        offset = inputTriangles.length + setEli;
+        nBuffer[offset] -= n;
+        if(nBuffer[offset] < 2){
+            nBuffer[offset] = inputEllipsoids[setEli].n;
+        }
+    }
+
+    if(offset >= 0){
+        if (ambientBuffer[offset][0] >= 0.9){
+            ambientBuffer[offset] = [0.1, 0.1, 0.1];
+        }
+        for(var i=0; i< ambientBuffer[offset].length; i++){
+            ambientBuffer[offset][i] += a[0];
+        }
+
+        if (Math.max(...diffuseBuffer[offset]) >= 0.9){
+            for(var i=0; i< diffuseBuffer[offset].length; i++){
+                if (diffuseBuffer[offset][i] > 0){
+                    diffuseBuffer[offset][i] = 0.1
+                }
+            }
+        }
+        for(var i=0; i< diffuseBuffer[offset].length; i++){
+            if (diffuseBuffer[offset][i] > 0){
+                diffuseBuffer[offset][i] += d[0];
+            }
+        }
+        if (specularBuffer[offset][0] >= 0.9){
+            specularBuffer[offset] = [0.1, 0.1, 0.1];
+        }
+        for(var i=0; i< specularBuffer[offset].length; i++){
+            specularBuffer[offset][i] += s[0];
+        }
+    }
+    updateAndLoadTriangles(inputTriangles, inputEllipsoids);
+}
+
 function initializeControls(inputTriangles, inputEllipsoids){
     document.addEventListener('keydown', function(event) {
         console.log(event.code);
+        var p0 = [0.0,0.0,0.0];
+        var p1 = [0.1,0.1,0.1];
         switch(event.code)
         {
             case 'KeyA':
@@ -670,6 +725,18 @@ function initializeControls(inputTriangles, inputEllipsoids){
                 setEli = -1;
                 setTri = -1;
                 loadTriangles(inputTriangles, inputEllipsoids);
+                break;
+            case 'KeyN':
+                updateColorAndLoadTriangles(inputTriangles, inputEllipsoids,p0,p0,p0,1);
+                break;
+            case 'Digit1':
+                updateColorAndLoadTriangles(inputTriangles, inputEllipsoids, p1, p0, p0, 0);
+                break;
+            case 'Digit2':
+                updateColorAndLoadTriangles(inputTriangles, inputEllipsoids, p0, p1, p0, 0);
+                break;
+            case 'Digit3':
+                updateColorAndLoadTriangles(inputTriangles, inputEllipsoids, p0, p0, p1, 0);
                 break;
             default:
                 break;
